@@ -40,17 +40,18 @@ namespace CustomerReader
                     //Reading child Json objects.
                     JObject address = (JObject)record["Address"];
                     //Assigning the Json object values to a new Customer object property and adding it to the Customer List.
-                    customerList.Add(new Customer
+                    Customer customer = new Customer
                     {
                         Email = (String)record["Email"],
                         FirstName = (String)record["FirstName"],
                         LastName = (String)record["LastName"],
                         Phone = (String)record["PhoneNumber"],
-                        StreetAddress = (String)address["StreetAddress"],
-                        City = (String)address["City"],
-                        State = (String)address["State"],
-                        ZipCode = (String)address["ZipCode"]
-                    });
+                    };
+                    customer.CustomerAddress.StreetAddress = (String)address["StreetAddress"];
+                    customer.CustomerAddress.City = (String)address["City"];
+                    customer.CustomerAddress.State = (String)address["State"];
+                    customer.CustomerAddress.ZipCode = (String)address["ZipCode"];
+                    customerList.Add(customer);
                 }
             }
             catch (FileNotFoundException e)

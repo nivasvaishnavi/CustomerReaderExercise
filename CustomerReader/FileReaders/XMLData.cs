@@ -40,18 +40,18 @@ namespace CustomerReader
                     XmlElement aElement = (XmlElement)eElement.GetElementsByTagName("Address").Item(0);
 
                     //Assigning the node's inner text to a new Customer object property and adding it to the Customer List.
-                    customerList.Add(new Customer
+                    Customer customer = new Customer
                     {
                         Email = node["Email"].InnerText,
                         FirstName = node["FirstName"].InnerText,
                         LastName = node["LastName"].InnerText,
                         Phone = node["PhoneNumber"].InnerText,
-
-                        StreetAddress = aElement.GetElementsByTagName("StreetAddress")[0].InnerText,
-                        City = aElement.GetElementsByTagName("City")[0].InnerText,
-                        State = aElement.GetElementsByTagName("State")[0].InnerText,
-                        ZipCode = aElement.GetElementsByTagName("ZipCode")[0].InnerText
-                    });
+                    };
+                    customer.CustomerAddress.StreetAddress = aElement.GetElementsByTagName("StreetAddress")[0].InnerText;
+                    customer.CustomerAddress.City = aElement.GetElementsByTagName("City")[0].InnerText;
+                    customer.CustomerAddress.State = aElement.GetElementsByTagName("State")[0].InnerText;
+                    customer.CustomerAddress.ZipCode = aElement.GetElementsByTagName("ZipCode")[0].InnerText;
+                    customerList.Add(customer);
                 }
             }
             catch (Exception e)

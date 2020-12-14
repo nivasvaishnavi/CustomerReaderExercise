@@ -41,17 +41,20 @@ namespace CustomerReader
                         while (line != null)
                         {
                             attributes = line.Split(',');
-                            customerList.Add(new Customer
+
+                            Customer customer = new Customer
                             {
                                 Email = attributes[0],
                                 FirstName = attributes[1],
                                 LastName = attributes[2],
-                                Phone = attributes[3],
-                                StreetAddress = attributes[4],
-                                City = attributes[5],
-                                State = attributes[6],
-                                ZipCode = attributes[7]
-                            });
+                                Phone = attributes[3]
+                            };
+                            customer.CustomerAddress.StreetAddress = attributes[4];
+                            customer.CustomerAddress.City = attributes[5];
+                            customer.CustomerAddress.State = attributes[6];
+                            customer.CustomerAddress.ZipCode = attributes[7];
+                            customerList.Add(customer);
+
                             line = streamReader.ReadLine();
                         }
                     }
